@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.models;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -10,6 +11,7 @@ import java.util.Objects;
 public class Saldo {
 
     @Id
+    @Column(length = 16)
     private String cpf;
     private Double valor;
     private Double limite;

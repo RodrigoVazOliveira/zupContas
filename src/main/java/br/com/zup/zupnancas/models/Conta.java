@@ -18,6 +18,7 @@ public class Conta {
     @Column(length = 150)
     private String descricacao;
     private LocalDate dataDeSaida;
+    private LocalDate dataDeVencimento;
     private Status status;
 
     @ManyToOne(optional = false)
@@ -64,6 +65,14 @@ public class Conta {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDate getDataDeVencimento() {
+        return dataDeVencimento;
+    }
+
+    public void setDataDeVencimento(LocalDate dataDeVencimento) {
+        this.dataDeVencimento = dataDeVencimento;
     }
 
     public Saldo getSaldo() {
