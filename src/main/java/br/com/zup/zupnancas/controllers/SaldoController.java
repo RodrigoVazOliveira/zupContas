@@ -1,7 +1,9 @@
 package br.com.zup.zupnancas.controllers;
 
+import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.services.SaldoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -14,5 +16,10 @@ public class SaldoController {
     @Autowired
     public SaldoController(SaldoService saldoService) {
         this.saldoService = saldoService;
+    }
+
+    @PostMapping
+    public Saldo gravarNovoSaldo() {
+
     }
 }
