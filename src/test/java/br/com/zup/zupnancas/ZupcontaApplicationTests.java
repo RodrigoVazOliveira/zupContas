@@ -1,4 +1,4 @@
-package br.com.zup.zupconta;
+package br.com.zup.zupnancas;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

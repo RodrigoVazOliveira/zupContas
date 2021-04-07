@@ -1,4 +1,4 @@
-package br.com.zup.zupconta;
+package br.com.zup.zupnancas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
