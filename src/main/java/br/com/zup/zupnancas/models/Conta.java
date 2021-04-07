@@ -1,11 +1,14 @@
 package br.com.zup.zupnancas.models;
 
+import br.com.zup.zupnancas.enumerates.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
-@Table(name = "creditos")
-public class Credito {
+@Table(name = "contas")
+public class Conta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,12 +17,13 @@ public class Credito {
 
     @Column(length = 150)
     private String descricacao;
-    private LocalDate dataDeEntrada;
+    private LocalDate dataDeSaida;
+    private Status status;
 
     @ManyToOne(optional = false)
     private Saldo saldo;
 
-    public Credito() {
+    public Conta() {
     }
 
     public Integer getId() {
@@ -46,12 +50,20 @@ public class Credito {
         this.descricacao = descricacao;
     }
 
-    public LocalDate getDataDeEntrada() {
-        return dataDeEntrada;
+    public LocalDate getDataDeSaida() {
+        return dataDeSaida;
     }
 
-    public void setDataDeEntrada(LocalDate dataDeEntrada) {
-        this.dataDeEntrada = dataDeEntrada;
+    public void setDataDeSaida(LocalDate dataDeSaida) {
+        this.dataDeSaida = dataDeSaida;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public Saldo getSaldo() {
@@ -62,5 +74,16 @@ public class Credito {
         this.saldo = saldo;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Conta conta = (Conta) o;
+        return Objects.equals(id, conta.id);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }
