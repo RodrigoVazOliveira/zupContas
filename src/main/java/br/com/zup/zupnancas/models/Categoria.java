@@ -1,11 +1,9 @@
 package br.com.zup.zupnancas.models;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import javax.persistence.*;
 import java.util.Objects;
 
-@CPF
+@Entity
 @Table(name = "categorias")
 public class Categoria {
 
