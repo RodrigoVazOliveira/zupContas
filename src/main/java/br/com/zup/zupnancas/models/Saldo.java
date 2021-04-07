@@ -1,4 +1,4 @@
-package br.com.zup.zupconta.models;
+package br.com.zup.zupnancas.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

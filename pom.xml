@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.zup</groupId>
-	<artifactId>zupconta</artifactId>
+	<artifactId>zupnancas</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>zupconta</name>
+	<name>zupnancas</name>
 	<description>REST API para controle de contas</description>
 	<properties>
 		<java.version>11</java.version>
