@@ -50,5 +50,12 @@ public class CadastrarSaldoDTO {
         this.limite = limite;
     }
 
+    public static Saldo converterSaldoDTOParaSaldo() {
+        Saldo saldo = new Saldo();
+        saldo.setCpf(this.cpf);
+        saldo.setValor(this.valor);
+        saldo.setLimite(this.limite);
 
+        return saldo;
+    }
 }
