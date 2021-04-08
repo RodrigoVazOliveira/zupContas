@@ -26,4 +26,8 @@ public class ContaService {
             throw new RuntimeException("O status deve ser apenas ARGUARDANDO OU ATRASADO!");
         }
     }
+
+    public Conta atualizarConta(Conta conta) {
+
+    }
 }
