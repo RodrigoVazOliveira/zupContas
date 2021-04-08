@@ -14,7 +14,7 @@ public class Credito {
     private Double valor;
 
     @Column(length = 150)
-    private String descricacao;
+    private String descricao;
     private LocalDate dataDeEntrada;
 
     @ManyToOne(optional = false)
@@ -42,12 +42,12 @@ public class Credito {
         this.valor = valor;
     }
 
-    public String getDescricacao() {
-        return descricacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricacao(String descricacao) {
-        this.descricacao = descricacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDate getDataDeEntrada() {
