@@ -27,4 +27,10 @@ public class CategoriaController {
                 cadastrarCategoriaDTO.converterCadastrarCategoriaDtoParaCategoria()
         );
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<Categoria> visualizarTodasCategorias() {
+        return categoriaService.obterTodasCategorias();
+    }
 }
