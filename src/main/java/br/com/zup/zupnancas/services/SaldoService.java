@@ -22,6 +22,13 @@ public class SaldoService {
         return saldoRepository.save(saldo);
     }
 
+    /**
+     * Método para adicionar o valor do crédito ao saldo
+     * busca o saldo que foi passado no crédito
+     * após isso é feito a soma do valor e gravado no banco de dados
+     * @param credito
+     * @exception RuntimeException
+     * */
     public void creditarSaldo(Credito credito) {
         Optional<Saldo> optionalSaldo = saldoRepository.findById(credito.getSaldo().getCpf());
 
