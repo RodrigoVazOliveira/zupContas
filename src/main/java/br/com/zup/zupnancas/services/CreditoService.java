@@ -45,4 +45,8 @@ public class CreditoService {
         }
         categorias = categoriasCadastradas;
     }
+
+    public Iterable<Credito> obterTodosOsCreditos() {
+        return creditoRepository.findAll();
+    }
 }
