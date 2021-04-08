@@ -15,11 +15,9 @@ public class CadastrarSaldoDTO {
     private String cpf;
 
     @NotNull(message = "O campo valor deve ser informado!")
-    @NotEmpty(message = "o campo valor está vazio")
     private Double valor;
 
     @NotNull(message = "O campo limite deve ser informado!")
-    @NotEmpty(message = "o campo limite está vazio")
     @Min(value = 0, message = "o valor do limite deve ser maior do que zero!")
     private Double limite;
 

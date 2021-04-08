@@ -10,7 +10,6 @@ import javax.validation.constraints.NotNull;
 public class CadastrarCreditoDTO {
 
     @NotNull(message = "O campo valor não foi informado")
-    @NotEmpty(message = "O valor está vazio!")
     private Double valor;
 
     @NotNull(message = "O campo descricacao não foi informado")
