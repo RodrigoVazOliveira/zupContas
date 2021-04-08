@@ -42,4 +42,8 @@ public class SaldoService {
 
         saldoRepository.save(saldo);
     }
+
+    public Iterable<Saldo> obterTodosSaldos() {
+        return saldoRepository.findAll();
+    }
 }
