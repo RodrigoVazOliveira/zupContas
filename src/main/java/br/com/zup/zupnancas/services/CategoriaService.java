@@ -30,4 +30,15 @@ public class CategoriaService {
     public Iterable<Categoria> obterTodasCategorias() {
         return categoriaRepository.findAll();
     }
+
+    public void deletarCategoria(Categoria categoria) {
+        Categoria categoriaGravada = pesquisarCategoriaPorId(categoria);
+        categoriaRepository.delete(categoriaGravada);
+    }
+
+    public void deletarCategoria(Integer id) {
+        Categoria categoria = new Categoria();
+        categoria.setId(id);
+        deletarCategoria(categoria);
+    }
 }
