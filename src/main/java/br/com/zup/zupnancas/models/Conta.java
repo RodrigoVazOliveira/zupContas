@@ -16,7 +16,7 @@ public class Conta {
     private Double valor;
 
     @Column(length = 150)
-    private String descricacao;
+    private String descricao;
     private LocalDate dataDeSaida;
     private LocalDate dataDeVencimento;
     private Status status;
@@ -43,12 +43,12 @@ public class Conta {
         this.valor = valor;
     }
 
-    public String getDescricacao() {
-        return descricacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricacao(String descricacao) {
-        this.descricacao = descricacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDate getDataDeSaida() {

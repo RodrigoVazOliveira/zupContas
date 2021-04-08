@@ -4,12 +4,11 @@ import br.com.zup.zupnancas.models.Credito;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
-import java.util.List;
 
 public class SaidaCadastrarCreditoDTO {
     private Integer id;
     private Double valor;
-    private String descricacao;
+    private String descricao;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeEntrada;
@@ -33,12 +32,12 @@ public class SaidaCadastrarCreditoDTO {
         this.valor = valor;
     }
 
-    public String getDescricacao() {
-        return descricacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricacao(String descricacao) {
-        this.descricacao = descricacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDate getDataDeEntrada() {
@@ -53,7 +52,7 @@ public class SaidaCadastrarCreditoDTO {
         SaidaCadastrarCreditoDTO saidaCadastrarCreditoDTO = new SaidaCadastrarCreditoDTO();
         saidaCadastrarCreditoDTO.setId(credito.getId());
         saidaCadastrarCreditoDTO.setValor(credito.getValor());
-        saidaCadastrarCreditoDTO.setDescricacao(credito.getDescricacao());
+        saidaCadastrarCreditoDTO.setDescricao(credito.getDescricao());
         saidaCadastrarCreditoDTO.setDataDeEntrada(credito.getDataDeEntrada());
         return saidaCadastrarCreditoDTO;
     }
