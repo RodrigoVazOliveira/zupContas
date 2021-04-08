@@ -27,8 +27,6 @@ public class CadastrarContaDTO {
     private LocalDate dataDeVencimento;
 
     @NotNull(message = "O campo status não foi informado!")
-    @NotEmpty(message = "O campo status está vazio!")
-    @NotBlank(message = "O campo status está em branco!")
     private Status status;
 
     @NotNull(message = "O campo cpf não foi informado!")

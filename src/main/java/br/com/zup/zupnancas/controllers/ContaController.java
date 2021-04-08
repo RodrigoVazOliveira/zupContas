@@ -7,6 +7,7 @@ import br.com.zup.zupnancas.services.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -24,7 +25,12 @@ public class ContaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaCadastrarContaDTO gravarNovaConta(@RequestBody @Valid CadastrarContaDTO cadastrarContaDTO) {
-        Conta conta = contaService.gravarNovaConta(cadastrarContaDTO.converterCadastrarContaDtoParaConta());
-        return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
+        try {
+            Conta conta = contaService.gravarNovaConta(cadastrarContaDTO.converterCadastrarContaDtoParaConta());
+            return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+
     }
 }

@@ -1,6 +1,5 @@
 package br.com.zup.zupnancas.dto.conta;
 
-import br.com.zup.zupnancas.dto.credito.SaidaCadastrarCreditoDTO;
 import br.com.zup.zupnancas.enumerates.Status;
 import br.com.zup.zupnancas.models.Conta;
 import com.fasterxml.jackson.annotation.JsonFormat;
