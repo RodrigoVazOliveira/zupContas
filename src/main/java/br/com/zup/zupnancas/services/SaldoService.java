@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.models.Saldo;
 import br.com.zup.zupnancas.repositories.SaldoRepository;
@@ -22,6 +23,16 @@ public class SaldoService {
         return saldoRepository.save(saldo);
     }
 
+    public Saldo pesquisarSaldoPorCpf(String cpf) {
+        Optional<Saldo> optionalSaldo = saldoRepository.findById(cpf);
+
+        if (optionalSaldo.isEmpty()) {
+            throw new RuntimeException("Não existe saldo com o CPF " + cpf);
+        }
+
+        return optionalSaldo.get();
+    }
+
     /**
      * Método para adicionar o valor do crédito ao saldo
      * busca o saldo que foi passado no crédito
@@ -30,17 +41,28 @@ public class SaldoService {
      * @exception RuntimeException
      * */
     public void creditarSaldo(Credito credito) {
-        Optional<Saldo> optionalSaldo = saldoRepository.findById(credito.getSaldo().getCpf());
-
-        if (optionalSaldo.isEmpty()) {
-            throw new RuntimeException("Não existe saldo com o CPF " + credito.getSaldo().getCpf());
-        }
-
-        Saldo saldo = optionalSaldo.get();
+        Saldo saldo = pesquisarSaldoPorCpf(credito.getSaldo().getCpf());
         Double valorAtualizado = saldo.getValor() + credito.getValor();
         saldo.setValor(valorAtualizado);
+        gravarNovoSaldo(saldo);
+    }
 
-        saldoRepository.save(saldo);
+    /**
+     * o método é responsavel por atualizar o saldo
+     * caso possua saldo suficiente
+     * */
+    public Boolean debitarConta(Conta conta) {
+        Saldo saldo = pesquisarSaldoPorCpf(conta.getSaldo().getCpf());
+        Double limiteDebito = saldo.getLimite() + saldo.getValor();
+
+        if (limiteDebito < conta.getValor()) {
+            return false;
+        }
+
+        saldo.setValor(saldo.getValor() - conta.getValor());
+        gravarNovoSaldo(saldo);
+
+        return true;
     }
 
     public Iterable<Saldo> obterTodosSaldos() {
