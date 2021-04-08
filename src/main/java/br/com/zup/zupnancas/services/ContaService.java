@@ -33,6 +33,11 @@ public class ContaService {
 
     public Conta atualizarConta(Conta conta) {
         Optional<Conta> optionalConta = contaRepository.findById(conta.getId());
+
+        if (optionalConta.isEmpty()) {
+            throw new RuntimeException("Conta não localizada");
+        }
+
         Conta contaAntiga = optionalConta.get();
 
         if (atualizarValorNoSaldo(contaAntiga)) {

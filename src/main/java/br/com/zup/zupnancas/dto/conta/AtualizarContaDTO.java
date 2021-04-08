@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.dto.conta;
 
 import br.com.zup.zupnancas.enumerates.Status;
+import br.com.zup.zupnancas.models.Conta;
 
 import javax.validation.constraints.NotNull;
 
@@ -29,5 +30,12 @@ public class AtualizarContaDTO {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public Conta converterAtualizarContaDtoParaConta() {
+        Conta conta = new Conta();
+        conta.setId(this.id);
+        conta.setStatus(this.status);
+        return conta;
     }
 }
