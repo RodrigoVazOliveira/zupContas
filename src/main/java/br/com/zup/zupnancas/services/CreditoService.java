@@ -26,7 +26,7 @@ public class CreditoService {
 
     public Credito adicionarNovoCredito(Credito credito) {
         credito.setDataDeEntrada(LocalDate.now());
-        cadastrarCategorias(credito.getCategoria());
+        cadastrarCategorias(credito.getCategorias());
         Credito novoCredito = creditoRepository.save(credito);
         saldoService.creditarSaldo(novoCredito);
         return novoCredito;
@@ -48,5 +48,9 @@ public class CreditoService {
 
     public Iterable<Credito> obterTodosOsCreditos() {
         return creditoRepository.findAll();
+    }
+
+    public Iterable<Credito> obterTodosOsCreditosPorNomeDaCategoria(String nome) {
+        return creditoRepository.findByCategoriasNome(nome);
     }
 }

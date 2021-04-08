@@ -67,7 +67,7 @@ public class SaidaCadastrarCreditoDTO {
         dto.setValor(credito.getValor());
         dto.setDescricao(credito.getDescricao());
         dto.setDataDeEntrada(credito.getDataDeEntrada());
-        dto.setCategorias(converterCategoriasParaCategoriasDto(credito.getCategoria()));
+        dto.setCategorias(converterCategoriasParaCategoriasDto(credito.getCategorias()));
         return dto;
     }
 
