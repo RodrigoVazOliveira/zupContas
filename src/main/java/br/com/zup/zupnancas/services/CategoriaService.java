@@ -16,4 +16,8 @@ public class CategoriaService {
     public Categoria gravarNovaCategoria(Categoria categoria) {
         return categoriaRepository.save(categoria);
     }
+
+    public Iterable<Categoria> obterTodasCategorias() {
+        return categoriaRepository.findAll();
+    }
 }
