@@ -49,4 +49,8 @@ public class CreditoService {
     public Iterable<Credito> obterTodosOsCreditos() {
         return creditoRepository.findAll();
     }
+
+    public Iterable<Credito> obterTodosOsCreditosPorNomeDaCategoria(String nome) {
+        return creditoRepository.findByCategoriasNome(nome);
+    }
 }
