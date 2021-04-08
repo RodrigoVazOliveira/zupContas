@@ -4,4 +4,5 @@ import br.com.zup.zupnancas.models.Conta;
 import org.springframework.data.repository.CrudRepository;
 
 public interface ContaRepository extends CrudRepository<Conta, Integer> {
+    Iterable<Conta> findByStatus(Status status);
 }
