@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.controllers;
 
 import br.com.zup.zupnancas.dto.conta.CadastrarContaDTO;
+import br.com.zup.zupnancas.dto.conta.SaidaCadastrarContaDTO;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.services.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,6 @@ public class ContaController {
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaCadastrarContaDTO gravarNovaConta(@RequestBody @Valid CadastrarContaDTO cadastrarContaDTO) {
         Conta conta = contaService.gravarNovaConta(cadastrarContaDTO.converterCadastrarContaDtoParaConta());
-
+        return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
     }
 }
