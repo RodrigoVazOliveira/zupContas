@@ -67,7 +67,7 @@ public class CadastrarCreditoDTO {
         Saldo saldo = new Saldo();
         saldo.setCpf(this.cpf);
         credito.setSaldo(saldo);
-        credito.setCategoria(this.categorias);
+        credito.setCategorias(this.categorias);
         return credito;
     }
 }

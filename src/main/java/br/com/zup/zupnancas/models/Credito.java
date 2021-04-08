@@ -21,7 +21,7 @@ public class Credito {
     private Saldo saldo;
 
     @ManyToMany
-    private List<Categoria> categoria;
+    private List<Categoria> categorias;
 
     public Credito() {
     }
@@ -66,11 +66,11 @@ public class Credito {
         this.saldo = saldo;
     }
 
-    public List<Categoria> getCategoria() {
-        return categoria;
+    public List<Categoria> getCategorias() {
+        return categorias;
     }
 
-    public void setCategoria(List<Categoria> categoria) {
-        this.categoria = categoria;
+    public void setCategorias(List<Categoria> categorias) {
+        this.categorias = categorias;
     }
 }

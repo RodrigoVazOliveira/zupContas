@@ -43,9 +43,9 @@ public class CreditoController {
 
     @GetMapping("categorias")
     public Iterable<SaidaCadastrarCreditoDTO> visualizartodosCreditosPorNomeDeCategoria(
-            @RequestParam(name = "categoria")  String categoria) {
+            @RequestParam(name = "nome")  String nome) {
         return  SaidaCadastrarCreditoDTO.converterListaCreditoParaListaCreditoDto(
-                creditoService.obterTodosOsCreditosPorNomeDaCategoria(categoria)
+                creditoService.obterTodosOsCreditosPorNomeDaCategoria(nome)
         );
     }
 }

@@ -26,7 +26,7 @@ public class CreditoService {
 
     public Credito adicionarNovoCredito(Credito credito) {
         credito.setDataDeEntrada(LocalDate.now());
-        cadastrarCategorias(credito.getCategoria());
+        cadastrarCategorias(credito.getCategorias());
         Credito novoCredito = creditoRepository.save(credito);
         saldoService.creditarSaldo(novoCredito);
         return novoCredito;
