@@ -6,14 +6,18 @@ import br.com.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ContaService {
 
-    private ContaRepository contaRepository;
+    private final ContaRepository contaRepository;
+    private final SaldoService saldoService;
 
     @Autowired
-    public ContaService(ContaRepository contaRepository) {
+    public ContaService(ContaRepository contaRepository, SaldoService saldoService) {
         this.contaRepository = contaRepository;
+        this.saldoService = saldoService;
     }
 
     public Conta gravarNovaConta(Conta conta) {
@@ -25,5 +29,26 @@ public class ContaService {
         if (status.equals(Status.PAGO)) {
             throw new RuntimeException("O status deve ser apenas ARGUARDANDO OU ATRASADO!");
         }
+    }
+
+    public Conta atualizarConta(Conta conta) {
+        Optional<Conta> optionalConta = contaRepository.findById(conta.getId());
+
+        if (optionalConta.isEmpty()) {
+            throw new RuntimeException("Conta não localizada");
+        }
+
+        Conta contaAntiga = optionalConta.get();
+
+        if (atualizarValorNoSaldo(contaAntiga)) {
+            contaAntiga.setStatus(conta.getStatus());
+            return contaRepository.save(contaAntiga);
+        }
+
+        return contaAntiga;
+    }
+
+    private Boolean atualizarValorNoSaldo(Conta conta) {
+        return saldoService.debitarConta(conta);
     }
 }

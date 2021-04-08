@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.controllers;
 
+import br.com.zup.zupnancas.dto.conta.AtualizarContaDTO;
 import br.com.zup.zupnancas.dto.conta.CadastrarContaDTO;
 import br.com.zup.zupnancas.dto.conta.SaidaCadastrarContaDTO;
 import br.com.zup.zupnancas.models.Conta;
@@ -27,6 +28,17 @@ public class ContaController {
     public SaidaCadastrarContaDTO gravarNovaConta(@RequestBody @Valid CadastrarContaDTO cadastrarContaDTO) {
         try {
             Conta conta = contaService.gravarNovaConta(cadastrarContaDTO.converterCadastrarContaDtoParaConta());
+            return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
+        } catch (RuntimeException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @PutMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public SaidaCadastrarContaDTO atualizarConta(@RequestBody @Valid AtualizarContaDTO atualizarContaDTO) {
+        try {
+            Conta conta = contaService.atualizarConta(atualizarContaDTO.converterAtualizarContaDtoParaConta());
             return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
