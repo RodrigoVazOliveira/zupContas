@@ -32,4 +32,12 @@ public class CreditoController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<SaidaCadastrarCreditoDTO> visualizarTodosCreditos() {
+        return SaidaCadastrarCreditoDTO.converterListaCreditoParaListaCreditoDto(
+                creditoService.obterTodosOsCreditos()
+        );
+    }
 }
