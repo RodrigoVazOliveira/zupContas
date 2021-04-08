@@ -55,4 +55,8 @@ public class ContaService {
     private Boolean atualizarValorNoSaldo(Conta conta) {
         return saldoService.debitarConta(conta);
     }
+
+    public Iterable<Conta> pesquisarContaPorStatus(Status status) {
+        return contaRepository.findByStatus(status);
+    }
 }

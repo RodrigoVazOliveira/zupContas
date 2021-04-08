@@ -5,6 +5,8 @@ import br.com.zup.zupnancas.models.Conta;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaidaCadastrarContaDTO {
 
@@ -77,5 +79,14 @@ public class SaidaCadastrarContaDTO {
         dto.setDataDeSaida(conta.getDataDeSaida());
         dto.setDataDeVencimento(conta.getDataDeVencimento());
         return dto;
+    }
+
+    public static Iterable<SaidaCadastrarContaDTO> converterListaContaParaListContaDto(Iterable<Conta> contas) {
+        List<SaidaCadastrarContaDTO> dtos = new ArrayList<>();
+        for (Conta conta : contas) {
+            dtos.add(converterContaParaSaidaCadastrarContaDTO(conta));
+        }
+
+        return dtos;
     }
 }

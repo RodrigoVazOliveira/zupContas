@@ -3,6 +3,7 @@ package br.com.zup.zupnancas.controllers;
 import br.com.zup.zupnancas.dto.conta.AtualizarContaDTO;
 import br.com.zup.zupnancas.dto.conta.CadastrarContaDTO;
 import br.com.zup.zupnancas.dto.conta.SaidaCadastrarContaDTO;
+import br.com.zup.zupnancas.enumerates.Status;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.services.ContaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,13 @@ public class ContaController {
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
+    }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    public Iterable<SaidaCadastrarContaDTO> pesquisarContaPorStatus(@RequestParam(name = "status") Status status) {
+        return SaidaCadastrarContaDTO.converterListaContaParaListContaDto(
+                contaService.pesquisarContaPorStatus(status)
+        );
     }
 }
