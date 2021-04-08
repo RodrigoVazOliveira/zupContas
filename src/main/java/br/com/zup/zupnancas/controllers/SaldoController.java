@@ -25,4 +25,10 @@ public class SaldoController {
     public Saldo gravarNovoSaldo(@RequestBody @Valid CadastrarSaldoDTO cadastrarSaldoDTO) {
         return saldoService.gravarNovoSaldo(cadastrarSaldoDTO.converterSaldoDTOParaSaldo());
     }
+
+    @GetMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Iterable<Saldo> obterTodosSaldos() {
+        return saldoService.obterTodosSaldos();
+    }
 }
