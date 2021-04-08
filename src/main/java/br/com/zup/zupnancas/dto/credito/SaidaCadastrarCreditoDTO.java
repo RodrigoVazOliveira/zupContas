@@ -78,4 +78,12 @@ public class SaidaCadastrarCreditoDTO {
         }
         return categoriasDto;
     }
+
+    public   static Iterable<SaidaCadastrarCreditoDTO> converterListaCreditoParaListaCreditoDto(Iterable<Credito> creditos) {
+        List<SaidaCadastrarCreditoDTO> dtos = new ArrayList<>();
+        for (Credito credito : creditos ) {
+            dtos.add(converterCreditoParaSaidaCadastrarCredito(credito));
+        }
+        return dtos;
+    }
 }
