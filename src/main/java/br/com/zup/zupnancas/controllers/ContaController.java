@@ -39,7 +39,7 @@ public class ContaController {
     public SaidaCadastrarContaDTO atualizarConta(@RequestBody @Valid AtualizarContaDTO atualizarContaDTO) {
         try {
             Conta conta = contaService.atualizarConta(atualizarContaDTO.converterAtualizarContaDtoParaConta());
-            SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
+            return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
         } catch (RuntimeException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
