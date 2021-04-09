@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.credito.CreditoSemCadastroException;
 import br.com.zup.zupnancas.models.Categoria;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.repositories.CreditoRepository;
@@ -47,6 +48,9 @@ public class CreditoService {
     }
 
     public Iterable<Credito> obterTodosOsCreditos() {
+        if (creditoRepository.count() == 0) {
+            throw new CreditoSemCadastroException("Nenhum crédito foi localizado!");
+        }
         return creditoRepository.findAll();
     }
 

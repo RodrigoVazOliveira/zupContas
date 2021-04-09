@@ -5,6 +5,7 @@ import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdExceptio
 import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
 import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorIdException;
 import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorStatusException;
+import br.com.zup.zupnancas.exceptions.credito.CreditoSemCadastroException;
 import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
 import br.com.zup.zupnancas.exceptions.validacao.CampoErro;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeArgumentoException;
@@ -59,7 +60,7 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
 
     @ExceptionHandler({CategoriaVaziaException.class})
     @ResponseStatus(HttpStatus.OK)
-    public ValidacaoDeSemArgsException pesquisarCategoriaPorIdException(CategoriaVaziaException ex) {
+    public ValidacaoDeSemArgsException categoriaVaziaException(CategoriaVaziaException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
@@ -83,7 +84,7 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
 
     @ExceptionHandler({PesquisarContaPorIdException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ValidacaoDeSemArgsException cadastroDeContaException(PesquisarContaPorIdException ex) {
+    public ValidacaoDeSemArgsException pesquisarContaPorIdException(PesquisarContaPorIdException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
@@ -95,7 +96,7 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
 
     @ExceptionHandler({PesquisarContaPorStatusException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ValidacaoDeSemArgsException cadastroDeContaException(PesquisarContaPorStatusException ex) {
+    public ValidacaoDeSemArgsException pesquisarContaPorStatusException(PesquisarContaPorStatusException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
@@ -108,6 +109,18 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
     @ExceptionHandler({PesquisarSaldoPorCpfException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidacaoDeSemArgsException pesquisarSaldoPorCpfException(PesquisarSaldoPorCpfException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({CreditoSemCadastroException.class})
+    @ResponseStatus(HttpStatus.OK)
+    public ValidacaoDeSemArgsException creditoSemCadastroException(CreditoSemCadastroException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
