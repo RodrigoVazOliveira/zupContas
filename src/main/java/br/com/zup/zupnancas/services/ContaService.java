@@ -8,7 +8,6 @@ import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +26,7 @@ public class ContaService {
 
     public Conta gravarNovaConta(Conta conta) {
         verificarStatus(conta.getStatus());
+        conta.setSaldo(saldoService.pesquisarSaldoPorCpf(conta.getSaldo().getCpf()));
         return contaRepository.save(conta);
     }
 

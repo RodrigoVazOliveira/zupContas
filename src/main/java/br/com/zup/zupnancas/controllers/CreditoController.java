@@ -7,7 +7,6 @@ import br.com.zup.zupnancas.services.CreditoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 
@@ -25,12 +24,8 @@ public class CreditoController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaCadastrarCreditoDTO adicionarNovoCredito(@RequestBody @Valid CadastrarCreditoDTO cadastrarCreditoDTO) {
-        try {
-            Credito credito = creditoService.adicionarNovoCredito(cadastrarCreditoDTO.converterCadastrarCreditoDtoParaCredito());
-            return SaidaCadastrarCreditoDTO.converterCreditoParaSaidaCadastrarCredito(credito);
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        Credito credito = creditoService.adicionarNovoCredito(cadastrarCreditoDTO.converterCadastrarCreditoDtoParaCredito());
+        return SaidaCadastrarCreditoDTO.converterCreditoParaSaidaCadastrarCredito(credito);
     }
 
     @GetMapping
@@ -42,6 +37,7 @@ public class CreditoController {
     }
 
     @GetMapping("categorias")
+    @ResponseStatus(HttpStatus.OK)
     public Iterable<SaidaCadastrarCreditoDTO> visualizartodosCreditosPorNomeDeCategoria(
             @RequestParam(name = "nome")  String nome) {
         return  SaidaCadastrarCreditoDTO.converterListaCreditoParaListaCreditoDto(

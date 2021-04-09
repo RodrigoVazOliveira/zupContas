@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.services;
 
 import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
+import br.com.zup.zupnancas.exceptions.saldo.SemRegistroSaldoException;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.models.Saldo;
@@ -39,7 +40,7 @@ public class SaldoService {
      * busca o saldo que foi passado no crédito
      * após isso é feito a soma do valor e gravado no banco de dados
      * @param credito
-     * @exception RuntimeException
+     * @exception PesquisarSaldoPorCpfException
      * */
     public void creditarSaldo(Credito credito) {
         Saldo saldo = pesquisarSaldoPorCpf(credito.getSaldo().getCpf());
@@ -67,6 +68,9 @@ public class SaldoService {
     }
 
     public Iterable<Saldo> obterTodosSaldos() {
+        if (saldoRepository.count() == 0) {
+            throw new SemRegistroSaldoException("nenhum registro de saldo foi feito!");
+        }
         return saldoRepository.findAll();
     }
 }

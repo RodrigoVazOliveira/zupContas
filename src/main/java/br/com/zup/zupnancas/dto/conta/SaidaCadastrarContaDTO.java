@@ -18,6 +18,7 @@ public class SaidaCadastrarContaDTO {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeVencimento;
     private Status status;
+    private String cpf;
 
     public SaidaCadastrarContaDTO() {
     }
@@ -70,6 +71,14 @@ public class SaidaCadastrarContaDTO {
         this.status = status;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public static SaidaCadastrarContaDTO converterContaParaSaidaCadastrarContaDTO(Conta conta) {
         SaidaCadastrarContaDTO dto = new SaidaCadastrarContaDTO();
         dto.setId(conta.getId());
@@ -78,6 +87,7 @@ public class SaidaCadastrarContaDTO {
         dto.setStatus(conta.getStatus());
         dto.setDataDeSaida(conta.getDataDeSaida());
         dto.setDataDeVencimento(conta.getDataDeVencimento());
+        dto.setCpf(conta.getSaldo().getCpf());
         return dto;
     }
 
