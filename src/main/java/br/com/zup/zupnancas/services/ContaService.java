@@ -26,6 +26,7 @@ public class ContaService {
 
     public Conta gravarNovaConta(Conta conta) {
         verificarStatus(conta.getStatus());
+        conta.setSaldo(saldoService.pesquisarSaldoPorCpf(conta.getSaldo().getCpf()));
         return contaRepository.save(conta);
     }
 

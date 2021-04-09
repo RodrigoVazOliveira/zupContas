@@ -30,13 +30,14 @@ public class CreditoService {
 
     public Credito adicionarNovoCredito(Credito credito) {
         credito.setDataDeEntrada(LocalDate.now());
-        cadastrarCategorias(credito.getCategorias());
+        credito.setCategorias(cadastrarCategorias(credito.getCategorias()));
+        credito.setSaldo(saldoService.pesquisarSaldoPorCpf(credito.getSaldo().getCpf()));
         Credito novoCredito = creditoRepository.save(credito);
         saldoService.creditarSaldo(novoCredito);
         return novoCredito;
     }
 
-    private void cadastrarCategorias(List<Categoria> categorias) {
+    private List<Categoria> cadastrarCategorias(List<Categoria> categorias) {
         List<Categoria> categoriasCadastradas = new ArrayList<>();
         for (Categoria categoria : categorias) {
             if (categoria.getId() == null) {
@@ -47,7 +48,7 @@ public class CreditoService {
                 );
             }
         }
-        categorias = categoriasCadastradas;
+        return categoriasCadastradas;
     }
 
     public Iterable<Credito> obterTodosOsCreditos() {
