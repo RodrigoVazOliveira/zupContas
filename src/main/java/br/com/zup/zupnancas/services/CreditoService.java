@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.services;
 
 import br.com.zup.zupnancas.exceptions.credito.CreditoSemCadastroException;
+import br.com.zup.zupnancas.exceptions.credito.PesquisarCreditoPorNomeDeCategoriaException;
 import br.com.zup.zupnancas.models.Categoria;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.repositories.CreditoRepository;
@@ -19,7 +20,9 @@ public class CreditoService {
     private final CategoriaService categoriaService;
 
     @Autowired
-    public CreditoService(CreditoRepository creditoRepository, SaldoService saldoService, CategoriaService categoriaService) {
+    public CreditoService(CreditoRepository creditoRepository,
+                          SaldoService saldoService,
+                          CategoriaService categoriaService) {
         this.creditoRepository = creditoRepository;
         this.saldoService = saldoService;
         this.categoriaService = categoriaService;
@@ -55,6 +58,11 @@ public class CreditoService {
     }
 
     public Iterable<Credito> obterTodosOsCreditosPorNomeDaCategoria(String nome) {
+        List<Credito> creditos = (List<Credito>) creditoRepository.findByCategoriasNome(nome);
+        if (creditos.size() == 0) {
+            throw new PesquisarCreditoPorNomeDeCategoriaException(
+                    "nenhum crédito com localizado com as seguintes categorias " + nome);
+        }
         return creditoRepository.findByCategoriasNome(nome);
     }
 }

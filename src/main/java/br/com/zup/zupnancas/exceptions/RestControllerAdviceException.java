@@ -6,6 +6,7 @@ import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
 import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorIdException;
 import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorStatusException;
 import br.com.zup.zupnancas.exceptions.credito.CreditoSemCadastroException;
+import br.com.zup.zupnancas.exceptions.credito.PesquisarCreditoPorNomeDeCategoriaException;
 import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
 import br.com.zup.zupnancas.exceptions.validacao.CampoErro;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeArgumentoException;
@@ -28,7 +29,8 @@ import java.util.List;
 public class RestControllerAdviceException  extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+            MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ValidacaoDeArgumentoException validacaoDeArgumentoException = new ValidacaoDeArgumentoException(
                 "Validação de campo",
                 status.value(),
@@ -121,6 +123,19 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
     @ExceptionHandler({CreditoSemCadastroException.class})
     @ResponseStatus(HttpStatus.OK)
     public ValidacaoDeSemArgsException creditoSemCadastroException(CreditoSemCadastroException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({PesquisarCreditoPorNomeDeCategoriaException.class})
+    @ResponseStatus(HttpStatus.OK)
+    public ValidacaoDeSemArgsException pesquisarCreditoPorNomeDeCategoriaException(
+            PesquisarCreditoPorNomeDeCategoriaException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
