@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Constraint;
 import javax.validation.Valid;
 
 @RestController
@@ -40,9 +41,11 @@ public class ContaController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<SaidaCadastrarContaDTO> pesquisarContaPorStatus(@RequestParam(name = "status") Status status) {
-        return SaidaCadastrarContaDTO.converterListaContaParaListContaDto(
-                contaService.pesquisarContaPorStatus(status)
-        );
+    public Iterable<SaidaCadastrarContaDTO> pesquisarContaPorStatus(
+            @RequestParam(name = "status")
+                    Status status) {    
+            return SaidaCadastrarContaDTO.converterListaContaParaListContaDto(
+                    contaService.pesquisarContaPorStatus(status)
+            );
     }
 }
