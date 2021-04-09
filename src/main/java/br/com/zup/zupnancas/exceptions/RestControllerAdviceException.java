@@ -8,6 +8,7 @@ import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorStatusException;
 import br.com.zup.zupnancas.exceptions.credito.CreditoSemCadastroException;
 import br.com.zup.zupnancas.exceptions.credito.PesquisarCreditoPorNomeDeCategoriaException;
 import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
+import br.com.zup.zupnancas.exceptions.saldo.SemRegistroSaldoException;
 import br.com.zup.zupnancas.exceptions.validacao.CampoErro;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeArgumentoException;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeSemArgsException;
@@ -136,6 +137,19 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
     @ResponseStatus(HttpStatus.OK)
     public ValidacaoDeSemArgsException pesquisarCreditoPorNomeDeCategoriaException(
             PesquisarCreditoPorNomeDeCategoriaException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({SemRegistroSaldoException.class})
+    @ResponseStatus(HttpStatus.OK)
+    public ValidacaoDeSemArgsException semRegistroSaldoException(
+            SemRegistroSaldoException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
