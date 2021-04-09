@@ -2,6 +2,7 @@ package br.com.zup.zupnancas.exceptions;
 
 import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdException;
 import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
+import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
 import br.com.zup.zupnancas.exceptions.validacao.CampoErro;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeArgumentoException;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeSemArgsException;
@@ -56,6 +57,18 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
     @ExceptionHandler({CadastroDeContaException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidacaoDeSemArgsException cadastroDeContaException(CadastroDeContaException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({PesquisarSaldoPorCpfException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidacaoDeSemArgsException pesquisarSaldoPorCpfException(PesquisarSaldoPorCpfException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),
