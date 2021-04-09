@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.categoria.CategoriaVaziaException;
 import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdException;
 import br.com.zup.zupnancas.models.Categoria;
 import br.com.zup.zupnancas.repositories.CategoriaRepository;
@@ -31,6 +32,10 @@ public class CategoriaService {
     }
 
     public Iterable<Categoria> obterTodasCategorias() {
+        if (categoriaRepository.count() == 0) {
+            throw new CategoriaVaziaException("Nenhuma categoria foi localizada!");
+        }
+
         return categoriaRepository.findAll();
     }
 

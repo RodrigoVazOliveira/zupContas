@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.exceptions;
 
+import br.com.zup.zupnancas.exceptions.categoria.CategoriaVaziaException;
 import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdException;
 import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
 import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
@@ -50,6 +51,18 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
             ex.getStatus(),
             ex.getDescricaoStatus(),
             ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({CategoriaVaziaException.class})
+    @ResponseStatus(HttpStatus.OK)
+    public ValidacaoDeSemArgsException pesquisarCategoriaPorIdException(CategoriaVaziaException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
         );
         return modeloEx;
     }

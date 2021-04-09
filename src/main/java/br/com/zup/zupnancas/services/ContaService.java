@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.services;
 
 import br.com.zup.zupnancas.enumerates.Status;
+import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.repositories.ContaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class ContaService {
 
     public void verificarStatus(Status status) {
         if (status.equals(Status.PAGO)) {
-            throw new RuntimeException("O status deve ser apenas ARGUARDANDO OU ATRASADO!");
+            throw new CadastroDeContaException("O status deve ser apenas ARGUARDANDO OU ATRASADO!");
         }
     }
 
