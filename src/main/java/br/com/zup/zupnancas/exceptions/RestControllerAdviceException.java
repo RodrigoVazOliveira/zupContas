@@ -1,6 +1,7 @@
 package br.com.zup.zupnancas.exceptions;
 
 import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdException;
+import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
 import br.com.zup.zupnancas.exceptions.validacao.CampoErro;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeArgumentoException;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeSemArgsException;
@@ -48,6 +49,18 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
             ex.getStatus(),
             ex.getDescricaoStatus(),
             ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({CadastroDeContaException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidacaoDeSemArgsException cadastroDeContaException(CadastroDeContaException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
         );
         return modeloEx;
     }
