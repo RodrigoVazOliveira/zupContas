@@ -1,5 +1,6 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
 import br.com.zup.zupnancas.models.Conta;
 import br.com.zup.zupnancas.models.Credito;
 import br.com.zup.zupnancas.models.Saldo;
@@ -27,7 +28,7 @@ public class SaldoService {
         Optional<Saldo> optionalSaldo = saldoRepository.findById(cpf);
 
         if (optionalSaldo.isEmpty()) {
-            throw new RuntimeException("Não existe saldo com o CPF " + cpf);
+            throw new PesquisarSaldoPorCpfException("Não existe saldo com o CPF " + cpf);
         }
 
         return optionalSaldo.get();

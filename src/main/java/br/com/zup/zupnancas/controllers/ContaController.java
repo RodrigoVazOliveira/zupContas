@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.validation.Constraint;
 import javax.validation.Valid;
 
 @RestController
@@ -27,30 +28,24 @@ public class ContaController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaCadastrarContaDTO gravarNovaConta(@RequestBody @Valid CadastrarContaDTO cadastrarContaDTO) {
-        try {
-            Conta conta = contaService.gravarNovaConta(cadastrarContaDTO.converterCadastrarContaDtoParaConta());
-            return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        Conta conta = contaService.gravarNovaConta(cadastrarContaDTO.converterCadastrarContaDtoParaConta());
+        return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
     }
 
     @PutMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SaidaCadastrarContaDTO atualizarConta(@RequestBody @Valid AtualizarContaDTO atualizarContaDTO) {
-        try {
-            Conta conta = contaService.atualizarConta(atualizarContaDTO.converterAtualizarContaDtoParaConta());
-            return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
-        } catch (RuntimeException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
-        }
+        Conta conta = contaService.atualizarConta(atualizarContaDTO.converterAtualizarContaDtoParaConta());
+        return SaidaCadastrarContaDTO.converterContaParaSaidaCadastrarContaDTO(conta);
     }
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Iterable<SaidaCadastrarContaDTO> pesquisarContaPorStatus(@RequestParam(name = "status") Status status) {
-        return SaidaCadastrarContaDTO.converterListaContaParaListContaDto(
-                contaService.pesquisarContaPorStatus(status)
-        );
+    public Iterable<SaidaCadastrarContaDTO> pesquisarContaPorStatus(
+            @RequestParam(name = "status")
+                    Status status) {    
+            return SaidaCadastrarContaDTO.converterListaContaParaListContaDto(
+                    contaService.pesquisarContaPorStatus(status)
+            );
     }
 }
