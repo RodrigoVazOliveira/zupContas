@@ -16,6 +16,7 @@ public class SaidaCadastrarCreditoDTO {
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeEntrada;
+    private String cpf;
     private List<SaidaCategoriaCreditoDTO> categorias;
 
     public SaidaCadastrarCreditoDTO() {
@@ -53,6 +54,14 @@ public class SaidaCadastrarCreditoDTO {
         this.dataDeEntrada = dataDeEntrada;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public List<SaidaCategoriaCreditoDTO> getCategorias() {
         return categorias;
     }
@@ -67,6 +76,7 @@ public class SaidaCadastrarCreditoDTO {
         dto.setValor(credito.getValor());
         dto.setDescricao(credito.getDescricao());
         dto.setDataDeEntrada(credito.getDataDeEntrada());
+        dto.setCpf(credito.getSaldo().getCpf());
         dto.setCategorias(converterCategoriasParaCategoriasDto(credito.getCategorias()));
         return dto;
     }
