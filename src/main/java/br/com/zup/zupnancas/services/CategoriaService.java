@@ -1,7 +1,9 @@
 package br.com.zup.zupnancas.services;
 
+import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdException;
 import br.com.zup.zupnancas.models.Categoria;
 import br.com.zup.zupnancas.repositories.CategoriaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -9,8 +11,9 @@ import java.util.Optional;
 @Service
 public class CategoriaService {
 
-    private CategoriaRepository categoriaRepository;
+    private final CategoriaRepository categoriaRepository;
 
+    @Autowired
     public CategoriaService(CategoriaRepository categoriaRepository) {
         this.categoriaRepository = categoriaRepository;
     }
@@ -22,7 +25,7 @@ public class CategoriaService {
     public Categoria pesquisarCategoriaPorId(Categoria categoria) {
         Optional<Categoria> optionalCategoria = categoriaRepository.findById(categoria.getId());
         if (optionalCategoria.isEmpty()) {
-            throw new RuntimeException("Categoria com id  " + categoria.getId() + " não localizada!");
+            throw new PesquisarCategoriaPorIdException("Categoria com id  " + categoria.getId() + " não localizada!");
         }
         return optionalCategoria.get();
     }
