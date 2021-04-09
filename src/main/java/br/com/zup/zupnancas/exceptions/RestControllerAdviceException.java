@@ -3,6 +3,8 @@ package br.com.zup.zupnancas.exceptions;
 import br.com.zup.zupnancas.exceptions.categoria.CategoriaVaziaException;
 import br.com.zup.zupnancas.exceptions.categoria.PesquisarCategoriaPorIdException;
 import br.com.zup.zupnancas.exceptions.conta.CadastroDeContaException;
+import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorIdException;
+import br.com.zup.zupnancas.exceptions.conta.PesquisarContaPorStatusException;
 import br.com.zup.zupnancas.exceptions.saldo.PesquisarSaldoPorCpfException;
 import br.com.zup.zupnancas.exceptions.validacao.CampoErro;
 import br.com.zup.zupnancas.exceptions.validacao.ValidacaoDeArgumentoException;
@@ -70,6 +72,30 @@ public class RestControllerAdviceException  extends ResponseEntityExceptionHandl
     @ExceptionHandler({CadastroDeContaException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ValidacaoDeSemArgsException cadastroDeContaException(CadastroDeContaException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({PesquisarContaPorIdException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidacaoDeSemArgsException cadastroDeContaException(PesquisarContaPorIdException ex) {
+        ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
+                ex.getTipoDeErro(),
+                ex.getStatus(),
+                ex.getDescricaoStatus(),
+                ex.getMessage()
+        );
+        return modeloEx;
+    }
+
+    @ExceptionHandler({PesquisarContaPorStatusException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ValidacaoDeSemArgsException cadastroDeContaException(PesquisarContaPorStatusException ex) {
         ValidacaoDeSemArgsException modeloEx = new ValidacaoDeSemArgsException(
                 ex.getTipoDeErro(),
                 ex.getStatus(),

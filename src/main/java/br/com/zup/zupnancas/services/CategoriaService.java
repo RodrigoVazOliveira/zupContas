@@ -26,7 +26,7 @@ public class CategoriaService {
     public Categoria pesquisarCategoriaPorId(Categoria categoria) {
         Optional<Categoria> optionalCategoria = categoriaRepository.findById(categoria.getId());
         if (optionalCategoria.isEmpty()) {
-            throw new PesquisarCategoriaPorIdException("Categoria com id  " + categoria.getId() + " não localizada!");
+            throw new PesquisarCategoriaPorIdException("Categoria com id " + categoria.getId() + " não localizada!");
         }
         return optionalCategoria.get();
     }
