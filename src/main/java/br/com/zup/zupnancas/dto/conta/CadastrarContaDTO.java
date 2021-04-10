@@ -19,7 +19,7 @@ public class CadastrarContaDTO {
     @NotNull(message = "O campo descricacao não foi informado!")
     @NotEmpty(message = "O campo descricacao está vazio!")
     @NotBlank(message = "O campo descricacao está em branco!")
-    private String descricacao;
+    private String descricao;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeSaida;
@@ -46,12 +46,12 @@ public class CadastrarContaDTO {
         this.valor = valor;
     }
 
-    public String getDescricacao() {
-        return descricacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricacao(String descricacao) {
-        this.descricacao = descricacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDate getDataDeSaida() {
@@ -89,7 +89,7 @@ public class CadastrarContaDTO {
     public Conta converterCadastrarContaDtoParaConta() {
         Conta conta = new Conta();
         conta.setValor(this.valor);
-        conta.setDescricao(this.descricacao);
+        conta.setDescricao(this.descricao);
         conta.setDataDeSaida(this.dataDeSaida);
         conta.setDataDeVencimento(this.dataDeVencimento);
 

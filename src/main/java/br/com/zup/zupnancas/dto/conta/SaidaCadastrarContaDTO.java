@@ -12,7 +12,7 @@ public class SaidaCadastrarContaDTO {
 
     private Integer id;
     private Double valor;
-    private String descricacao;
+    private String descricao;
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeSaida;
     @JsonFormat(pattern = "dd/MM/yyyy")
@@ -39,12 +39,12 @@ public class SaidaCadastrarContaDTO {
         this.valor = valor;
     }
 
-    public String getDescricacao() {
-        return descricacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescricacao(String descricacao) {
-        this.descricacao = descricacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
     public LocalDate getDataDeSaida() {
@@ -83,7 +83,7 @@ public class SaidaCadastrarContaDTO {
         SaidaCadastrarContaDTO dto = new SaidaCadastrarContaDTO();
         dto.setId(conta.getId());
         dto.setValor(conta.getValor());
-        dto.setDescricacao(conta.getDescricao());
+        dto.setDescricao(conta.getDescricao());
         dto.setStatus(conta.getStatus());
         dto.setDataDeSaida(conta.getDataDeSaida());
         dto.setDataDeVencimento(conta.getDataDeVencimento());
