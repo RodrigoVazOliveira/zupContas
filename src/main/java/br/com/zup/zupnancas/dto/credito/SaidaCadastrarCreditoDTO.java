@@ -17,7 +17,7 @@ public class SaidaCadastrarCreditoDTO {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataDeEntrada;
     private String cpf;
-    private List<SaidaCategoriaCreditoDTO> categorias;
+    private List<String> categorias;
 
     public SaidaCadastrarCreditoDTO() {
     }
@@ -62,11 +62,11 @@ public class SaidaCadastrarCreditoDTO {
         this.cpf = cpf;
     }
 
-    public List<SaidaCategoriaCreditoDTO> getCategorias() {
+    public List<String> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<SaidaCategoriaCreditoDTO> categorias) {
+    public void setCategorias(List<String> categorias) {
         this.categorias = categorias;
     }
 
@@ -81,10 +81,10 @@ public class SaidaCadastrarCreditoDTO {
         return dto;
     }
 
-    private static List<SaidaCategoriaCreditoDTO> converterCategoriasParaCategoriasDto(List<Categoria> categorias) {
-        List<SaidaCategoriaCreditoDTO> categoriasDto = new ArrayList<>();
+    private static List<String> converterCategoriasParaCategoriasDto(List<Categoria> categorias) {
+        List<String> categoriasDto = new ArrayList<>();
         for (Categoria categoria : categorias) {
-            categoriasDto.add(SaidaCategoriaCreditoDTO.converterModelParaDto(categoria));
+            categoriasDto.add(categoria.getNome());
         }
         return categoriasDto;
     }

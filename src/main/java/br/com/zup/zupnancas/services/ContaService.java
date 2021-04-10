@@ -64,7 +64,7 @@ public class ContaService {
     public Iterable<Conta> pesquisarContaPorStatus(Status status) {
         List<Conta> contas = (List<Conta>) contaRepository.findByStatus(status);
         if (contas.size() == 0) {
-            throw new PesquisarContaPorStatusException("Nenhuma conta foi localizada com status" + status.toString());
+            throw new PesquisarContaPorStatusException("Nenhuma conta foi localizada com status " + status.toString());
         }
         return contas;
     }
